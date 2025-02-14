@@ -11,8 +11,8 @@ const clientSchema = new Schema({
 
     state: {
         type: String,
-        enum: ['inProgress', 'Completed', 'Suspended'],
-        default: 'inProgress'
+        enum: ['En progreso', 'Completado', 'Suspendido'],
+        default: 'En progreso'
     },
 
     saleDate:{
@@ -24,6 +24,14 @@ const clientSchema = new Schema({
     },
 
     handoverDate:{
+        type: String,
+        validate: {
+            validator: validateDateFormat,
+            message: 'Invalid date format. Expected format: DD-MM-YYYY'
+        }
+    },
+
+    contractDate: {
         type: String,
         validate: {
             validator: validateDateFormat,
@@ -49,6 +57,11 @@ const clientSchema = new Schema({
     financialData: {
         type: financialDataScheme,
         require: true
+    },
+
+    active: {
+        type: Boolean,
+        default: true
     }
 });
 
