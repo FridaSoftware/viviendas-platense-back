@@ -1,8 +1,8 @@
 const { Schema } = require('mongoose');
 const { validateDateFormat } = require('../../utils/validateUtils.js');
 
-const projectDataScheme = new Schema({
-    model:{
+const projectDataSchema = new Schema({
+    model:{ // Determina el modelo de contrato
         type: String,
         enum: ['Wood', 'Eco', 'Steel', 'Steel Premium'],
         required: true
@@ -35,7 +35,7 @@ const projectDataScheme = new Schema({
         }
     },
 
-    items: [{
+    items: [{ // Ítems estipulados en el contrato, sean propios del modelo o agregados
         quantity:{
             type: Number,
             default: 0
@@ -45,10 +45,14 @@ const projectDataScheme = new Schema({
         },
         price:{
             type: Number
+        },
+        type: { // Variable para determinar si son los propios del tipo de contrato o son aparte
+            type: String,
+            enum: ['Normal', 'Extra']
         }
     }],
 
-    areas: [{
+    areas: [{ // Ambientes
         name:{
             type: String,
             required: true
@@ -63,7 +67,7 @@ const projectDataScheme = new Schema({
         }
     }],
 
-    sqm: {
+    sqm: { // Metros cuadrados
         house:{
             type: Number,
             required: true
@@ -76,7 +80,7 @@ const projectDataScheme = new Schema({
         }
     },
 
-    extraItems: [{
+    extraItems: [{ // Ítems estipulados luego de la firma del contrato
 
         quantity:{
             type: Number,
@@ -92,10 +96,10 @@ const projectDataScheme = new Schema({
         }
     }],
 
-    turnKey: {
+    turnKey: { // Llave en mano
         type: Boolean,
         default: false
     },
 });
 
-module.exports = projectDataScheme;
+module.exports = projectDataSchema;
