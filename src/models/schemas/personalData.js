@@ -1,6 +1,6 @@
 const { Schema } = require('mongoose');
 
-const personalDataScheme = new Schema({
+const personalDataSchema = new Schema({
 
     dni: {
         type: String,
@@ -23,9 +23,8 @@ const personalDataScheme = new Schema({
     },
 
     phone: {
-        type: String,
-        required: true
+        type: String
     }
 });
 
-module.exports = personalDataScheme;
+module.exports = personalDataSchema;
