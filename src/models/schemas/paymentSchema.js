@@ -7,7 +7,8 @@ const paymentSchema = new Schema({
         validate: {
             validator: validateDateFormat,
             message: 'Invalid date format. Expected format: DD-MM-YYYY'
-        }
+        },
+        
     },
 
     paidDate: { // Fecha en la que se realizó el pago
@@ -23,7 +24,7 @@ const paymentSchema = new Schema({
         type: Number
     },
 
-    amountWithLateFee: { // Total con punitoria
+    finalAmount: { // Total final, si hay punitoria se le suma
         type: Number
     },
 
