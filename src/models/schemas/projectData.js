@@ -2,16 +2,23 @@ const { Schema } = require('mongoose');
 const { validateDateFormat } = require('../../utils/validateUtils.js');
 
 const projectDataSchema = new Schema({
+
+    address: {
+        type: String
+    },
+
+    city: {
+        type: String
+    },
+
     model:{ // Determina el modelo de contrato
         type: String,
-        enum: ['Wood', 'Eco', 'Steel', 'Steel Premium'],
-        required: true
+        enum: ['Wood', 'Eco', 'Steel', 'Steel Premium']
     },
 
     roof:{
         type: String,
-        enum: ['Americana', 'Minimalista'],
-        required: true
+        enum: ['Americana', 'Minimalista']
     },
 
     base:{
@@ -30,8 +37,7 @@ const projectDataSchema = new Schema({
         },
         type: {
             type: String,
-            enum: ['Cliente', 'Empresa', 'Losa'],
-            required: true
+            enum: ['Cliente', 'Empresa', 'Losa']
         }
     },
 
@@ -54,23 +60,19 @@ const projectDataSchema = new Schema({
 
     areas: [{ // Ambientes
         name:{
-            type: String,
-            required: true
+            type: String
         },
         size1:{
-            type: Number,
-            required: true
+            type: Number
         },
         size2:{
-            type: Number,
-            required: true
+            type: Number
         }
     }],
 
     sqm: { // Metros cuadrados
         house:{
-            type: Number,
-            required: true
+            type: Number
         },
         gallery:{
             type: Number
@@ -84,12 +86,10 @@ const projectDataSchema = new Schema({
 
         quantity:{
             type: Number,
-            required: true,
             default: 0
         },
         description: {
             type: String,
-            required: true
         },
         price:{
             type: Number

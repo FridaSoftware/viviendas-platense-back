@@ -1,13 +1,13 @@
 const { Schema, model } = require('mongoose');
 const personalDataSchema = require('./schemas/personalData.js');
 const projectDataSchema = require('./schemas/projectData.js');
-const financialDataSchema = require('./schemas/financialDataSchema.js');
+const financialDataSchema = require('./schemas/financialData.js');
 const { validateDateFormat } = require('../utils/validateUtils.js');
 const getNextClientNumber = require('../utils/getNextClientNumber.js');
 
 const clientSchema = new Schema({
     number: {
-        type: Number,
+        type: String,
         unique: true
     },
 
@@ -47,8 +47,7 @@ const clientSchema = new Schema({
     },
 
     personalData: {
-        type: personalDataSchema,
-        required: true
+        type: personalDataSchema
     },
 
     projectData: {
@@ -56,8 +55,7 @@ const clientSchema = new Schema({
     },
 
     financialData: {
-        type: financialDataSchema,
-        required: true
+        type: financialDataSchema
     },
 
     other: { // Espacio para anotaciones
@@ -69,7 +67,6 @@ const clientSchema = new Schema({
         default: true
     }
 }, { timestamps: true }); // Genera los campos createdAt y updatedAt que devuelven la fecha de creación y de la última actualización de la entrada en la db
-
 
 // Middleware para generar un número único antes de guardar
 
