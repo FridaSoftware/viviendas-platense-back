@@ -12,6 +12,10 @@ const personalDataSchema = new Schema({
         required: true
     },
 
+    normalizedName: {
+        type: String
+    },
+
     address: {
         type: String,
         required: true
@@ -25,6 +29,13 @@ const personalDataSchema = new Schema({
     phone: {
         type: String
     }
+});
+
+personalDataSchema.pre('save', function (next) {
+    if (this.name) {
+        this.normalizedName = this.name.normalize('NFD').replace(/[̀-ͯ]/g, '');
+    }
+    next();
 });
 
 module.exports = personalDataSchema;

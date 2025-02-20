@@ -1,4 +1,4 @@
-const Client = require('../../models/Client.js');
+const Client = require('../../../models/Client.js');
 
 const postClientCtrl = async (dni, name, address, city, phone, projectAddress, projectCity, downPayment) => {
 

@@ -1,5 +1,5 @@
-const postController = require('../../controllers/client/postClient.js');
-const { validateDateFormat } = require('../../utils/validateUtils.js');
+const postController = require('../../../controllers/client/posts/postClient.js');
+const { validateDateFormat } = require('../../../utils/validateUtils.js');
 
 const postClientHandler = async (req, res) => {
     const { dni, name, address, city, phone, projectAddress, projectCity, downPayment } = req.body;
