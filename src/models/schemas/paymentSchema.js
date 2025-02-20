@@ -39,6 +39,10 @@ const paymentSchema = new Schema({
     isPaid: {
         type: Boolean,
         default: false
+    },
+
+    description: {
+        type: String
     }
 });
 
