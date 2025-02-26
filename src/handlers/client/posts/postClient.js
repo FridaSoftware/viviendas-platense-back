@@ -17,8 +17,8 @@ const postClientHandler = async (req, res) => {
         if(typeof projectCity !== 'string') return res.status(400).send({ error: 'Incorrect DataType - projectCity must be string' });
 
         if(downPayment){
-            if(!downPayment.paidDate || !downPayment.finalAmount || !downPayment.paymentMethod) return res.status(400).send({ error: 'Missing downPayment data' });
-            if(!validateDateFormat(downPayment.paidDate)) return res.status(400).send({ error: 'Invalid paidDate format. Expected format: DD-MM-YYYY' });
+            if(!downPayment.paidDate || !downPayment.finalAmount || !downPayment.paymentMethod || !downPayment.isPaid) return res.status(400).send({ error: 'Missing downPayment data' });
+            if(!validateDateFormat(downPayment.paidDate)) return res.status(400).send({ error: 'Invalid paidDate format. Expected format: DD/MM/YYYY' });
             if(typeof downPayment.paidDate !== 'string') return res.status(400).send({ error: 'Incorrect DataType - downPayment.paidDate must be string' });
             if(typeof downPayment.finalAmount !== 'number') return res.status(400).send({ error: 'Incorrect DataType - downPayment.finalAmount must be number' });
             if(typeof downPayment.paymentMethod !== 'string') return res.status(400).send({ error: 'Incorrect DataType - downPayment.paymentMethod must be string' });

@@ -12,7 +12,8 @@ const getClientsHandler = async (req, res) => {
         "projectData.model": 1,
         "projectData.roof": 1,
         "projectData.base.type": 1,
-        "financialData.paymentPlan": 1
+        "financialData.paymentPlan": 1,
+        "active": 1
     };
 
     try {

@@ -48,7 +48,7 @@ const financialDataSchema = new Schema({
                 type: String,
                 validate: {
                     validator: validateDateFormat,
-                    message: 'Invalid date format. Expected format: DD-MM-YYYY'
+                    message: 'Invalid date format. Expected format: DD/MM/YYYY'
                 }
             },
 
