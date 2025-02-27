@@ -10,7 +10,7 @@ const getClientsHandler = async (req, res) => {
         "projectData.address": 1,
         "projectData.city": 1,
         "projectData.model": 1,
-        "projectData.roof": 1,
+        "projectData.roof.type": 1,
         "projectData.base.type": 1,
         "financialData.paymentPlan": 1,
         "active": 1

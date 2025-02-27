@@ -17,8 +17,13 @@ const projectDataSchema = new Schema({
     },
 
     roof:{
-        type: String,
-        enum: ['Americana', 'Minimalista']
+        type:{
+            type: String,
+            enum: ['Americana', 'Minimalista']
+        },
+        slope: {
+            type: String
+        }
     },
 
     base:{
@@ -50,7 +55,8 @@ const projectDataSchema = new Schema({
             type: String
         },
         price:{
-            type: Number
+            type: Number,
+            default: null
         },
         type: { // Variable para determinar si son los propios del tipo de contrato o son aparte
             type: String,
@@ -71,14 +77,16 @@ const projectDataSchema = new Schema({
     }],
 
     sqm: { // Metros cuadrados
-        house:{
+        covered:{
             type: Number
         },
         gallery:{
-            type: Number
+            type: Number,
+            default: null
         },
         pergola:{
-            type: Number
+            type: Number,
+            default: null
         }
     },
 
