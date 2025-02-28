@@ -37,7 +37,7 @@ const putCreateContractHandler = async (req, res) => {
         if(installmentsQuantity && typeof installmentsQuantity !== 'number') return res.status(400).send({ error: 'Incorrect DataType - installmentsQuantity must be number' });
         if(installmentsPrice && typeof installmentsPrice !== 'number') return res.status(400).send({ error: 'Incorrect DataType - installmentsPrice must be number' });
 
-        const newContract = await putController(_id, contractDate, model, roofType, roofSlope, baseType, items, areas, sqm, paymentPlan, totalCost, payments, installmentsDate, installmentsQuantity, installmentsPrice);
+        const newContract = await putController(_id, client, contractDate, model, roofType, roofSlope, baseType, items, areas, sqm, paymentPlan, totalCost, payments, installmentsDate, installmentsQuantity, installmentsPrice);
         
         res.status(200).send(newContract);
 
