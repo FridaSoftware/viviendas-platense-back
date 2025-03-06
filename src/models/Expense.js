@@ -16,15 +16,14 @@ const expenseSchema = new Schema({
         required: true
     },
 
-    paymenthMetod: { 
+    paymentMethod: { 
         type: String,
         required: true
     },
 
     category: {
         type: Schema.Types.ObjectId,
-        ref: 'ExpenseCategory',
-        default: null
+        ref: 'ExpenseCategory'
     },
 
     description: { 

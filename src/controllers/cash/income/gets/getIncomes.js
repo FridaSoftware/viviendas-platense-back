@@ -3,7 +3,7 @@ const Income = require('../../../../models/Income.js');
 
 const getIncomeCtrl = async () => {
         const incomes = await Income.find()
-        // .populate('vehicles')
+        .populate('category');
     
         return incomes;
 };

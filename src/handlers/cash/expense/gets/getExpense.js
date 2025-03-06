@@ -1,4 +1,4 @@
-const getController = require('../../../../controllers/cash/gets/expense/getExpenses.js');
+const getController = require('../../../../controllers/cash/expense/gets/getExpenses.js');
 
 const getExpensesHandler = async (req, res) => {
 
