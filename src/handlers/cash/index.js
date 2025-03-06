@@ -7,6 +7,7 @@ const getExpenses = require('./expense/gets/getExpense.js');
 const postExpense = require('./expense/posts/postExpense.js');
 
 
+
 module.exports = {
     getIncomes,
     postIncome,
