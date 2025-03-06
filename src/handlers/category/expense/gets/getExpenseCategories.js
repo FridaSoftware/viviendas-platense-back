@@ -1,4 +1,4 @@
-const getController = require('../../../../controllers/category/gets/expense/getCategories.js');
+const getController = require('../../../../controllers/category/expense/gets/getCategories.js');
 
 const getExpenseCategoriesHandler = async (req, res) => {
 
