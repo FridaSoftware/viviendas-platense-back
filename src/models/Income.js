@@ -16,7 +16,7 @@ const incomeSchema = new Schema({
         required: true
     },
 
-    paymenthMetod: { 
+    paymentMethod: { 
         type: String,
         required: true
     },
