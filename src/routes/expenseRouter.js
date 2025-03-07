@@ -1,9 +1,11 @@
 const expenseRouter = require('express').Router();
-const { getExpenses, postExpense } = require('../handlers/cash/index.js');
+const { getExpenses, postExpense, putExpense } = require('../handlers/cash/index.js');
 const { getExpenseCategories, postExpenseCategory, putExpenseCategory, putExpenseCategoryStatus } = require('../handlers/category/index.js')
 
 expenseRouter.get('/', getExpenses);
 expenseRouter.post('/', postExpense);
+expenseRouter.put('/', putExpense);
+
 
 //--- CATEGORY
 expenseRouter.get('/category', getExpenseCategories);
