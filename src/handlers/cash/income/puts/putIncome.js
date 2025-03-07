@@ -1,12 +1,15 @@
-const postController = require('../../../../controllers/cash/income/posts/postIncome.js');
+const putController = require('../../../../controllers/cash/income/puts/putIncome.js');
 const { validateDateFormat } = require('../../../../utils/validateUtils.js');
 
-const postIncomeHandler = async (req, res) => {
-    const { date, amount, paymentMethod, category, description } = req.body;
+const putIncomeHandler = async (req, res) => {
 
+    const { _id, date, amount, paymentMethod, category, description } = req.body;
+    
     try {
         
-        if(!date || !amount || !paymentMethod) return res.status(400).send({ error: 'Missing data' });
+        if(!_id || !date || !amount || !paymentMethod) return res.status(400).send({ error: 'Missing data' });
+
+        if(typeof _id !== 'string') return res.status(400).send({ error: 'Incorrect DataType - _id must be string' });
 
         if(typeof date !== 'string') return res.status(400).send({ error: 'Incorrect DataType - date must be string' });
 
@@ -22,12 +25,12 @@ const postIncomeHandler = async (req, res) => {
 
         if(typeof description !== 'string') return res.status(400).send({ error: 'Incorrect DataType - description must be string' });
 
-        const newIncome = await postController(date, amount, paymentMethod, category, description);
-        res.status(200).send('Income created');
+        const updated = await putController(_id, date, amount, paymentMethod, category, description);
+        res.status(200).send('Income updated');
 
     } catch (error) {
         return res.status(500).send(error.message);
     }
 };
 
-module.exports = postIncomeHandler;
+module.exports = putIncomeHandler;
