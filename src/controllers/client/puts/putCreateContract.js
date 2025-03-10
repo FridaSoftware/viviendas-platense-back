@@ -1,6 +1,6 @@
 const Client = require('../../../models/Client.js');
 
-const putCreateContractCtrl = async (_id, client, contractDate, model, roofType, roofSlope, baseType, items, areas, sqm, paymentPlan, totalCost, payments, installmentsDate, installmentsQuantity, installmentsPrice) => {
+const putCreateContractCtrl = async (_id, client, contractDate, model, roofType, roofSlope, baseType, items, areas, sqm, additionals, paymentPlan, totalCost, payments, installmentsDate, installmentsQuantity, installmentsPrice) => {
     
     let actualModel = model || client.model;
 
@@ -54,7 +54,8 @@ const putCreateContractCtrl = async (_id, client, contractDate, model, roofType,
         },
         items,
         areas,
-        sqm
+        sqm,
+        additionals
     };
 
     const updatedFinancialData = {

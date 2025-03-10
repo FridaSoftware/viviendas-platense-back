@@ -104,6 +104,15 @@ const projectDataSchema = new Schema({
         }
     }],
 
+    additionals: [{ // Adicionales, solo son un texto en el contrato
+        description: {
+            type: String,
+        },
+        price:{
+            type: Number
+        }
+    }],
+
     turnKey: { // Llave en mano
         type: Boolean,
         default: false
