@@ -2,13 +2,7 @@ const Client = require('../../../models/Client.js');
 
 const putCreateContractCtrl = async (_id, client, contractDate, model, roofType, roofSlope, baseType, items, areas, sqm, paymentPlan, totalCost, payments, installmentsDate, installmentsQuantity, installmentsPrice) => {
     
-    let actualModel = "";
-
-    if(model){
-        actualModel = model;
-    } else {
-        actualModel = client.model;
-    }
+    let actualModel = model || client.model;
 
     let lumpSum = null;
     let financed = null;
@@ -48,31 +42,35 @@ const putCreateContractCtrl = async (_id, client, contractDate, model, roofType,
         };
     }
 
+    const updatedProjectData = {
+        ...client.projectData, // Mantener los datos existentes
+        model: actualModel,
+        roof: {
+            type: roofType,
+            slope: roofSlope
+        },
+        base: {
+            type: baseType
+        },
+        items,
+        areas,
+        sqm
+    };
+
+    const updatedFinancialData = {
+        ...client.financialData, // Mantener los datos existentes
+        totalCost,
+        paymentPlan,
+        lumpSum,
+        financed
+    };
+
     const newContract = {
         contractDate,
 
-        projectData: {
-            model: actualModel,
-            roof: {
-                type: roofType,
-                slope: roofSlope
-            },
+        projectData: updatedProjectData,
 
-            base: {
-                type: baseType
-            },
-
-            items,
-            areas,
-            sqm,
-        },
-
-        financialData: {
-            totalCost,
-            paymentPlan,
-            lumpSum,
-            financed
-        }
+        financialData: updatedFinancialData
     };
 
     const createdContract = await Client.findOneAndUpdate({ _id }, newContract, { new: true });
