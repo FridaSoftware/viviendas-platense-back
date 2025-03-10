@@ -7,19 +7,17 @@ const putCreateContractCtrl = async (_id, client, contractDate, model, roofType,
     let lumpSum = null;
     let financed = null;
 
-    if(paymentPlan === "Contado"){
+    if (paymentPlan === "Contado") {
         lumpSum = {
             payments
         };
     } else {
-
         let installments = [];
 
         const [day, month, year] = installmentsDate.split('/').map(Number);
         let currentDate = new Date(year, month - 1, day);
 
         for (let i = 0; i < installmentsQuantity; i++) {
-
             let dueDate = new Date(currentDate);
             dueDate.setDate(10);
             dueDate.setMonth(currentDate.getMonth() + i);
@@ -42,36 +40,31 @@ const putCreateContractCtrl = async (_id, client, contractDate, model, roofType,
         };
     }
 
-    const updatedProjectData = {
-        ...client.projectData, // Mantener los datos existentes
-        model: actualModel,
-        roof: {
-            type: roofType,
-            slope: roofSlope
-        },
-        base: {
-            type: baseType
-        },
-        items,
-        areas,
-        sqm,
-        additionals
-    };
-
-    const updatedFinancialData = {
-        ...client.financialData, // Mantener los datos existentes
-        totalCost,
-        paymentPlan,
-        lumpSum,
-        financed
-    };
-
     const newContract = {
         contractDate,
-
-        projectData: updatedProjectData,
-
-        financialData: updatedFinancialData
+        projectData: {
+            address: client.projectData.address,
+            city: client.projectData.city,
+            model: actualModel,
+            roof: {
+                type: roofType,
+                slope: roofSlope
+            },
+            base: {
+                type: baseType
+            },
+            items,
+            areas,
+            sqm,
+            additionals
+        },
+        financialData: {
+            downPayment: client.financialData.downPayment || null,
+            totalCost,
+            paymentPlan,
+            lumpSum,
+            financed
+        }
     };
 
     const createdContract = await Client.findOneAndUpdate({ _id }, newContract, { new: true });
