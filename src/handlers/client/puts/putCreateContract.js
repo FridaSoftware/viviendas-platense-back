@@ -29,7 +29,7 @@ const putCreateContractHandler = async (req, res) => {
         if(typeof sqm.covered !== 'number') return res.status(400).send({ error: 'Incorrect DataType - sqm.covered must be number' });
         if(sqm.gallery && typeof sqm.gallery !== 'number') return res.status(400).send({ error: 'Incorrect DataType - sqm.gallery must be number' });
         if(sqm.pergola && typeof sqm.pergola !== 'number') return res.status(400).send({ error: 'Incorrect DataType - sqm.pergola must be number' });
-        if (!Array.isArray(additionals) || additionals.length === 0) return res.status(400).send({ error: 'Incorrect DataType - additionals must be a non-empty array' });
+        if (additionals && (!Array.isArray(additionals) || additionals.length === 0)) return res.status(400).send({ error: 'Incorrect DataType - additionals must be a non-empty array' });
         if(typeof paymentPlan !== 'string') return res.status(400).send({ error: 'Incorrect DataType - paymentPlan must be string' });
         if(totalCost && typeof totalCost !== 'number') return res.status(400).send({ error: 'Incorrect DataType - totalCost must be number' });
         if (!Array.isArray(payments) || payments.length === 0) return res.status(400).send({ error: 'Incorrect DataType - payments must be a non-empty array' });
