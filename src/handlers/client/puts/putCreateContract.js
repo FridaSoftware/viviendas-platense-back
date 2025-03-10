@@ -4,7 +4,7 @@ const { validateDateFormat } = require('../../../utils/validateUtils.js');
 
 const putCreateContractHandler = async (req, res) => {
 
-    const { _id, contractDate, model, roofType, roofSlope, baseType, items, areas, sqm, paymentPlan, totalCost, payments, installmentsDate, installmentsQuantity, installmentsPrice } = req.body;
+    const { _id, contractDate, model, roofType, roofSlope, baseType, items, areas, sqm, additionals, paymentPlan, totalCost, payments, installmentsDate, installmentsQuantity, installmentsPrice } = req.body;
 
     const client = await getByIdController(_id);
 
@@ -29,6 +29,7 @@ const putCreateContractHandler = async (req, res) => {
         if(typeof sqm.covered !== 'number') return res.status(400).send({ error: 'Incorrect DataType - sqm.covered must be number' });
         if(sqm.gallery && typeof sqm.gallery !== 'number') return res.status(400).send({ error: 'Incorrect DataType - sqm.gallery must be number' });
         if(sqm.pergola && typeof sqm.pergola !== 'number') return res.status(400).send({ error: 'Incorrect DataType - sqm.pergola must be number' });
+        if (!Array.isArray(additionals) || additionals.length === 0) return res.status(400).send({ error: 'Incorrect DataType - additionals must be a non-empty array' });
         if(typeof paymentPlan !== 'string') return res.status(400).send({ error: 'Incorrect DataType - paymentPlan must be string' });
         if(totalCost && typeof totalCost !== 'number') return res.status(400).send({ error: 'Incorrect DataType - totalCost must be number' });
         if (!Array.isArray(payments) || payments.length === 0) return res.status(400).send({ error: 'Incorrect DataType - payments must be a non-empty array' });
@@ -37,7 +38,7 @@ const putCreateContractHandler = async (req, res) => {
         if(installmentsQuantity && typeof installmentsQuantity !== 'number') return res.status(400).send({ error: 'Incorrect DataType - installmentsQuantity must be number' });
         if(installmentsPrice && typeof installmentsPrice !== 'number') return res.status(400).send({ error: 'Incorrect DataType - installmentsPrice must be number' });
 
-        const newContract = await putController(_id, client, contractDate, model, roofType, roofSlope, baseType, items, areas, sqm, paymentPlan, totalCost, payments, installmentsDate, installmentsQuantity, installmentsPrice);
+        const newContract = await putController(_id, client, contractDate, model, roofType, roofSlope, baseType, items, areas, sqm, additionals, paymentPlan, totalCost, payments, installmentsDate, installmentsQuantity, installmentsPrice);
         
         res.status(200).send(newContract);
 
