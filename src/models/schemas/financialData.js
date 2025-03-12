@@ -18,7 +18,7 @@ const financialDataSchema = new Schema({
         }
     },
 
-    totalCost: { // Costo total de la venta
+    totalCost: { // Costo total de la venta en CONTADO - anticipo en FINANCIADO
         type: Number
     },
 
