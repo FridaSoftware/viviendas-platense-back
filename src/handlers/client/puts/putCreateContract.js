@@ -12,8 +12,7 @@ const putCreateContractHandler = async (req, res) => {
 
     try {
         
-        if(!_id || !contractDate || !roofType || !roofSlope || !baseType || !items || !areas || !sqm || !paymentPlan || !payments) return res.status(400).send({ error: 'Missing data' });
-        if(paymentPlan === 'Contado' && !totalCost) return res.status(400).send({ error: 'Missing total cost' });
+        if(!_id || !contractDate || !roofType || !roofSlope || !baseType || !items || !areas || !sqm || !paymentPlan || !totalCost || !payments) return res.status(400).send({ error: 'Missing data' });
         if(paymentPlan === 'Financiado' && (!installmentsDate || !installmentsQuantity || !installmentsPrice)) return res.status(400).send({ error: 'Missing total cost' });
         if(!client.projectData.model && !model) return res.status(400).send({ error: 'Missing model' });
 
@@ -31,7 +30,7 @@ const putCreateContractHandler = async (req, res) => {
         if(sqm.pergola && typeof sqm.pergola !== 'number') return res.status(400).send({ error: 'Incorrect DataType - sqm.pergola must be number' });
         if (additionals && !Array.isArray(additionals)) return res.status(400).send({ error: 'Incorrect DataType - additionals must be an array' });
         if(typeof paymentPlan !== 'string') return res.status(400).send({ error: 'Incorrect DataType - paymentPlan must be string' });
-        if(totalCost && typeof totalCost !== 'number') return res.status(400).send({ error: 'Incorrect DataType - totalCost must be number' });
+        if(typeof totalCost !== 'number') return res.status(400).send({ error: 'Incorrect DataType - totalCost must be number' });
         if (!Array.isArray(payments) || payments.length === 0) return res.status(400).send({ error: 'Incorrect DataType - payments must be a non-empty array' });
         if(installmentsDate && !validateDateFormat(installmentsDate)) return res.status(400).send({ error: 'Invalid installmentsDate format. Expected format: DD/MM/YYYY' });
         if(installmentsDate && typeof installmentsDate !== 'string') return res.status(400).send({ error: 'Incorrect DataType - installmentsDate must be string' });
