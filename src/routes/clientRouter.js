@@ -4,7 +4,7 @@ const { getClients, getClientById, postClient, putCreateContract, putClientStatu
 clientRouter.get('/', getClients);
 clientRouter.get('/:id', getClientById);
 clientRouter.post('/', postClient);
-clientRouter.put('/:id', putClientStatus);
 clientRouter.put('/contract', putCreateContract);
+clientRouter.put('/:id', putClientStatus);
 
 module.exports = clientRouter;
