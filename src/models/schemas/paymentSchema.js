@@ -32,6 +32,11 @@ const paymentSchema = new Schema({
         type: Number
     },
 
+    currency: {
+        type: String,
+        enum: ["Dólares", "Pesos"]
+    },
+
     paymentMethod: {
         type: String
     },
