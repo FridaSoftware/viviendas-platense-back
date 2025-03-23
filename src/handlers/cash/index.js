@@ -11,6 +11,7 @@ const putIncomeStatus = require('./income/puts/putIncomeStatus.js');
 const getExpenses = require('./expense/gets/getExpenses.js');
 const getActiveExpenses = require('./expense/gets/getActiveExpenses.js');
 const getExpenseById = require('./expense/gets/getExpenseById.js');
+const getExpensesByMonthAndYear = require('./expense/gets/getExpensesByMonthAndYear.js');
 const postExpense = require('./expense/posts/postExpense.js');
 const putExpense = require('./expense/puts/putExpense.js');
 const putExpenseStatus = require('./expense/puts/putExpenseStatus.js');
@@ -24,6 +25,7 @@ module.exports = {
     getIncomeById,
     getExpenseById,
     getIncomesByMonthAndYear,
+    getExpensesByMonthAndYear,
     postIncome,
     getExpenses,
     postExpense,
