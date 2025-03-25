@@ -48,6 +48,7 @@ const projectDataSchema = new Schema({
 
     leveling: {
         date: {
+            type: String,
             validate: {
                 validator: validateDateFormat,
                 message: 'Invalid date format. Expected format: DD/MM/YYYY'
