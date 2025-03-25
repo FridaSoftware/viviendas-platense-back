@@ -34,7 +34,7 @@ const paymentSchema = new Schema({
 
     currency: {
         type: String,
-        enum: ["Dólares", "Pesos"]
+        enum: ["USD", "ARS"]
     },
 
     paymentMethod: {
