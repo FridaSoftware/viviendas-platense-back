@@ -46,6 +46,20 @@ const projectDataSchema = new Schema({
         }
     },
 
+    leveling: {
+        date: {
+            validate: {
+                validator: validateDateFormat,
+                message: 'Invalid date format. Expected format: DD/MM/YYYY'
+            }
+        },
+        state: {
+            type: String,
+            enum: ['Hecho', 'Sin hacer'],
+            default: 'Sin hacer'
+        }
+    },
+
     items: [{ // Ítems estipulados en el contrato, sean propios del modelo o agregados
         quantity:{
             type: Number,

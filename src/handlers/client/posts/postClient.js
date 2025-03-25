@@ -23,7 +23,7 @@ const postClientHandler = async (req, res) => {
             if(typeof downPayment.paidDate !== 'string') return res.status(400).send({ error: 'Incorrect DataType - downPayment.paidDate must be string' });
             if(typeof downPayment.finalAmount !== 'number') return res.status(400).send({ error: 'Incorrect DataType - downPayment.finalAmount must be number' });
             if(typeof downPayment.paymentMethod !== 'string') return res.status(400).send({ error: 'Incorrect DataType - downPayment.paymentMethod must be string' });
-            if(typeof downPayment.currency !== 'string' || !(downPayment.currency === 'Dólares' || downPayment.currency === 'Pesos')) return res.status(400).send({ error: 'Incorrect DataType - downPayment.currency must be string "Dólares" or "Pesos"' });
+            if(typeof downPayment.currency !== 'string' || !(downPayment.currency === 'USD' || downPayment.currency === 'ARS')) return res.status(400).send({ error: 'Incorrect DataType - downPayment.currency must be string "USD" or "ARS"' });
         }
 
         const newClient = await postController(dni, name, address, city, phone, projectAddress, projectCity, model, downPayment);
