@@ -3,6 +3,7 @@ const getIncomes = require('./income/gets/getIncomes.js');
 const getActiveIncomes = require('./income/gets/getActiveIncomes.js');
 const getIncomeById = require('./income/gets/getIncomeById.js');
 const getIncomesByMonthAndYear = require('./income/gets/getIncomesByMonthAndYear.js');
+const getBalanceIncomesByMonthAndYear = require('./income/gets/getBalanceIncomesByMonthAndYear.js');
 const postIncome = require('./income/posts/postIncome.js');
 const putIncome = require('./income/puts/putIncome.js');
 const putIncomeStatus = require('./income/puts/putIncomeStatus.js');
@@ -17,7 +18,6 @@ const putExpense = require('./expense/puts/putExpense.js');
 const putExpenseStatus = require('./expense/puts/putExpenseStatus.js');
 
 
-
 module.exports = {
     getIncomes,
     getActiveIncomes,
@@ -26,6 +26,7 @@ module.exports = {
     getExpenseById,
     getIncomesByMonthAndYear,
     getExpensesByMonthAndYear,
+    getBalanceIncomesByMonthAndYear,
     postIncome,
     getExpenses,
     postExpense,

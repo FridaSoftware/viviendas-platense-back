@@ -16,7 +16,9 @@ const getExpensesByMonthAndYearCtrl = async (month, year) => {
         filter.date = { $regex: new RegExp(`/${yearString}$`) };
     }
 
-    const expensesByMonthAndYear = await Expense.find(filter);
+    const expensesByMonthAndYear = await Expense.find(filter)
+    .populate('category', 'name');
+    
     return expensesByMonthAndYear;
 };
 

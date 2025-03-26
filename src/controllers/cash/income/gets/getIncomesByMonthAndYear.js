@@ -16,7 +16,9 @@ const getIncomesByMonthAndYearCtrl = async (month, year) => {
         filter.date = { $regex: new RegExp(`/${yearString}$`) };
     }
 
-    const incomesByMonthAndYear = await Income.find(filter);
+    const incomesByMonthAndYear = await Income.find(filter)
+    .populate('category', 'name');
+
     return incomesByMonthAndYear;
 };
 
