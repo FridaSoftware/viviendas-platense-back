@@ -1,5 +1,5 @@
 const incomeRouter = require('express').Router();
-const { getIncomes, getActiveIncomes, getIncomeById, getIncomesByMonthAndYear, postIncome, putIncome, putIncomeStatus } = require('../handlers/cash/index.js');
+const { getIncomes, getActiveIncomes, getIncomeById, getIncomesByMonthAndYear, getBalanceIncomesByMonthAndYear, postIncome, putIncome, putIncomeStatus } = require('../handlers/cash/index.js');
 const { getIncomeCategories, getActiveIncomeCategories, postIncomeCategory, putIncomeCategory, putIncomeCategoryStatus } = require('../handlers/category/index.js');
 
 //---CATEGORY
@@ -13,6 +13,7 @@ incomeRouter.put('/category/:id', putIncomeCategoryStatus);
 incomeRouter.get('/all', getIncomes);
 incomeRouter.get('/', getActiveIncomes);
 incomeRouter.get('/filtered', getIncomesByMonthAndYear);
+incomeRouter.get('/balance', getBalanceIncomesByMonthAndYear);
 incomeRouter.get('/:id', getIncomeById);
 incomeRouter.post('/', postIncome);
 incomeRouter.put('/', putIncome);

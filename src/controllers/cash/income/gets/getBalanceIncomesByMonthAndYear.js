@@ -5,20 +5,12 @@ const getBalanceIncomesByMonthAndYearCtrl = async (month, year) => {
   const filter = { active: true };
 
   if (year && month) {
-    // Convertimos los valores a enteros
-    const parsedYear = parseInt(year);
-    const parsedMonth = parseInt(month);
+    const formattedMonth = month.toString().padStart(2, "0");
+    const yearString = year.toString();
 
-    const startOfMonth = new Date(parsedYear, parsedMonth, 1);
-    const endOfMonth = new Date(parsedYear, parsedMonth + 1, 1); // El primer día del mes siguiente
+    filter.date = { $regex: new RegExp(`^\\d{2}/${formattedMonth}/${yearString}$`) };
     
-    const incomes = await Income.find({
-      ...filter,
-      date: {
-        $gte: startOfMonth, // Fecha de inicio del mes
-        $lt: endOfMonth // Fecha de inicio del siguiente mes
-      }
-    });
+    const incomes = await Income.find(filter);
 
     // Calcular las sumas
     const totalIncomes = incomes.reduce((acc, income) => acc + income.amount, 0);
