@@ -1,11 +1,11 @@
 const Client = require('../../../models/Client.js');
 
-const putGeneralDataCtrl = async (_id, state, saleDate, handhoverDate, other, contractSigned) => {
+const putGeneralDataCtrl = async (_id, state, saleDate, handoverDate, other, contractSigned) => {
 
     const update = {
         ...(state !== undefined && { state }),
         ...(saleDate !== undefined && { saleDate }),
-        ...(handhoverDate !== undefined && { handhoverDate }),
+        ...(handoverDate !== undefined && { handoverDate }),
         ...(other !== undefined && { other }),
         ...(contractSigned !== undefined && { contractSigned })
     };
