@@ -18,7 +18,7 @@ const putGeneralDataHandler = async (req, res) => {
         if(other && (typeof other !== 'string')) return res.status(400).send({ error: 'Incorrect DataType - other must be string' });
         if(contractSigned !== undefined && typeof contractSigned !== 'boolean') return res.status(400).send({ error: 'Incorrect DataType - contractSigned must be boolean' });
 
-        const updatedClient = await putController(_id, state, saleDate, handhoverDate, other);
+        const updatedClient = await putController(_id, state, saleDate, handhoverDate, other, contractSigned);
         
         res.status(200).send(updatedClient);
 
