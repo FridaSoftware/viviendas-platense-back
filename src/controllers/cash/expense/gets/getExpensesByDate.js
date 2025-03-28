@@ -4,7 +4,7 @@ const Expense = require('../../../../models/Expense.js');
 const getExpensesByDateCtrl = async (start, end) => {
     // Función para convertir 'DD/MM/YYYY' a 'YYYY-MM-DD'
     const formatDateToISO = (dateStr) => {
-        const [day, month, year] = dateStr.split('/');
+        const [year, month, day] = dateStr.split('-');
         return new Date(`${year}-${month}-${day}T00:00:00.000Z`);
     };
 
