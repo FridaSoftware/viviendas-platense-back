@@ -1,6 +1,5 @@
 const getController = require('../../../../controllers/cash/income/gets/getBalanceIncomesByMonthAndYear.js');
 
-
 const getBalanceIncomesByMonthAndYearHandler = async (req, res) => {
 
     const { month, year } = req.query;

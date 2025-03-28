@@ -1,5 +1,5 @@
 const expenseRouter = require('express').Router();
-const { getExpenses, getActiveExpenses, getExpenseById, getExpensesByMonthAndYear, getExpensesByDate, getActiveExpensesByDate, postExpense, putExpense, putExpenseStatus } = require('../handlers/cash/index.js');
+const { getExpenses, getActiveExpenses, getExpenseById, getExpensesByMonthAndYear, getExpensesByDate, getActiveExpensesByDate, getBalanceExpensesByMonthAndYear, postExpense, putExpense, putExpenseStatus } = require('../handlers/cash/index.js');
 const { getExpenseCategories, getActiveExpenseCategories, postExpenseCategory, putExpenseCategory, putExpenseCategoryStatus } = require('../handlers/category/index.js')
 
 //--- CATEGORY
@@ -33,6 +33,7 @@ expenseRouter.get('/', (req, res, next) => {
 
 });
 expenseRouter.get('/filtered', getExpensesByMonthAndYear);
+expenseRouter.get('/balance', getBalanceExpensesByMonthAndYear);
 expenseRouter.get('/:id', getExpenseById);
 expenseRouter.post('/', postExpense);
 expenseRouter.put('/', putExpense);
