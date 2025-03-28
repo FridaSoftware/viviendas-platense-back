@@ -22,7 +22,7 @@ expenseRouter.get('/all', (req, res, next) => {
     return getExpenses(req, res, next);
 
 });
-incomeRouter.get('/', (req, res, next) => {
+expenseRouter.get('/', (req, res, next) => {
     const { start, end } = req.query;
 
     if(start && end){

@@ -3,7 +3,7 @@ const getController = require('../../../../controllers/cash/expense/gets/getActi
 
 const getActiveExpensesByDateHandler = async (req, res) => {
     const { start, end } = req.query;  
-
+    
     try {
         const activeExpensesByDate = await getController(start, end);
 
