@@ -10,8 +10,6 @@ incomeRouter.put('/category', putIncomeCategory);
 incomeRouter.put('/category/:id', putIncomeCategoryStatus);
 
 //---INCOME
-// incomeRouter.get('/all', getIncomes);
-// incomeRouter.get('/', getActiveIncomes);
 incomeRouter.get('/all', (req, res, next) => {
     const { start, end } = req.query;
 
