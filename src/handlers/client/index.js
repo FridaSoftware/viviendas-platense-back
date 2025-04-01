@@ -4,6 +4,7 @@ const postClient = require('./posts/postClient.js');
 const putCreateContract = require('./puts/putCreateContract.js');
 const putGeneralData = require('./puts/putGeneralData.js');
 const putPersonalData = require('./puts/putPersonalData.js');
+const putProjectData = require('./puts/putProjectData.js');
 const putClientStatus = require('./puts/putClientStatus.js');
 
 module.exports = {
@@ -13,5 +14,6 @@ module.exports = {
     putCreateContract,
     putGeneralData,
     putPersonalData,
+    putProjectData,
     putClientStatus
 }
