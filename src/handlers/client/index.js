@@ -5,6 +5,7 @@ const putCreateContract = require('./puts/putCreateContract.js');
 const putGeneralData = require('./puts/putGeneralData.js');
 const putPersonalData = require('./puts/putPersonalData.js');
 const putProjectData = require('./puts/putProjectData.js');
+const putFinancialData = require('./puts/putFinancialData.js');
 const putClientStatus = require('./puts/putClientStatus.js');
 
 module.exports = {
@@ -15,5 +16,6 @@ module.exports = {
     putGeneralData,
     putPersonalData,
     putProjectData,
+    putFinancialData,
     putClientStatus
 }
