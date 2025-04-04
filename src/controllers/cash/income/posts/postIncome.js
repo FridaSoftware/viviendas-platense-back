@@ -1,11 +1,12 @@
 require('../../../../db.js');
 const Income = require('../../../../models/Income.js');
 
-const postIncomeCtrl = async (date, amount, paymentMethod, category, description) => {
+const postIncomeCtrl = async (date, amount, currency, paymentMethod, category, description) => {
     
   const newIncome = {
     date,
     amount,
+    currency,
     paymentMethod,
     category,
     description

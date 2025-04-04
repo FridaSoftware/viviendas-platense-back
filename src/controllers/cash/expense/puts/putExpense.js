@@ -1,7 +1,7 @@
 require('../../../../db.js');
 const Expense = require('../../../../models/Expense.js');
 
-const putExpenseCtrl = async (_id, date, amount, paymentMethod, category, description) => {
+const putExpenseCtrl = async (_id, date, amount, currency, paymentMethod, category, description) => {
 
     const update = {};
 
@@ -11,6 +11,10 @@ const putExpenseCtrl = async (_id, date, amount, paymentMethod, category, descri
 
     if (amount !== null && amount !== false) {
         update.amount = amount;
+    };
+
+    if (currency !== null && currency !== false) {
+        update.currency = currency;
     };
 
     if (paymentMethod !== null && paymentMethod !== false) {
