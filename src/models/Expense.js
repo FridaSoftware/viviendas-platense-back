@@ -16,6 +16,12 @@ const expenseSchema = new Schema({
         required: true
     },
 
+    currency: { 
+        type: String, 
+        enum: ['ARS', 'USD'], // Limita a dos opciones: ARS o USD
+        required: true 
+    },
+
     paymentMethod: { 
         type: String,
         required: true

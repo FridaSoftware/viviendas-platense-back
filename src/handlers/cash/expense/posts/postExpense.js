@@ -2,7 +2,7 @@ const postController = require('../../../../controllers/cash/expense/posts/postE
 const { validateDateFormat } = require('../../../../utils/validateUtils.js');
 
 const postExpenseHandler = async (req, res) => {
-    const { date, amount, paymentMethod, category, description } = req.body;
+    const { date, amount, currency, paymentMethod, category, description } = req.body;
 
     try {
         
@@ -13,11 +13,12 @@ const postExpenseHandler = async (req, res) => {
         if (typeof amount !== 'number' || isNaN(amount)) {
             return res.status(400).send({ error: 'Incorrect DataType - amount must be a valid number' });
         };
+        if(typeof currency !== 'string') return res.status(400).send({ error: 'Incorrect DataType - currency must be string' });
         if(typeof paymentMethod !== 'string') return res.status(400).send({ error: 'Incorrect DataType - paymentMethod must be string' });
         if(typeof category !== 'string') return res.status(400).send({ error: 'Incorrect DataType - category must be string' });
         if(typeof description !== 'string') return res.status(400).send({ error: 'Incorrect DataType - description must be string' });
 
-        const newExpense = await postController(date, amount, paymentMethod, category, description);
+        const newExpense = await postController(date, amount, currency, paymentMethod, category, description);
         res.status(200).send('Expense created');
 
     } catch (error) {
