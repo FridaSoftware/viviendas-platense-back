@@ -1,7 +1,8 @@
 require('../../../../db.js');
 const Expense = require('../../../../models/Expense.js');
 
-const getBalanceExpensesByMonthAndYearCtrl = async (month, year) => {
+const getBalanceExpensesByMonthAndYearCtrl = async (month, year, categoryId) => {
+  
   const filter = { active: true };
 
   if (year && month) {
@@ -9,6 +10,10 @@ const getBalanceExpensesByMonthAndYearCtrl = async (month, year) => {
     const yearString = year.toString();
 
     filter.date = { $regex: new RegExp(`^\\d{2}/${formattedMonth}/${yearString}$`) };
+
+    if (categoryId) {
+      filter.category = categoryId;
+    };
     
     const expenses = await Expense.find(filter);
 
