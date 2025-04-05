@@ -12,16 +12,25 @@ const getBalanceExpensesByMonthAndYearCtrl = async (month, year) => {
     
     const expenses = await Expense.find(filter);
 
-    // Calcular las sumas
-    const totalExpenses = expenses.reduce((acc, expense) => acc + expense.amount, 0);
+    // Inicializamos dos variables para almacenar las sumas
+    const result = expenses.reduce((acc, expense) => {
+      if (expense.currency === 'ARS') {
+        acc.totalARS += expense.amount;
+      } else if (expense.currency === 'USD') {
+        acc.totalUSD += expense.amount;
+      }
+      return acc;
+    }, { totalARS: 0, totalUSD: 0 });
 
     return {
-      totalExpenses
+      totalARS: result.totalARS,
+      totalUSD: result.totalUSD
     };
   }
 
   return {
-    totalExpenses: 0,
+    totalARS: 0,
+    totalUSD: 0
   };
 };
 
