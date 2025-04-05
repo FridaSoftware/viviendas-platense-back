@@ -1,7 +1,8 @@
 require('../../../../db.js');
 const Expense = require('../../../../models/Expense.js');
 
-const getExpensesByMonthAndYearCtrl = async (month, year) => {
+const getExpensesByMonthAndYearCtrl = async (month, year, categoryId) => {
+    
     const filter = { active: true };
 
     if (year && month) {
@@ -14,7 +15,11 @@ const getExpensesByMonthAndYearCtrl = async (month, year) => {
         const yearString = year.toString();
         // Buscar cualquier fecha que termine en "/YYYY"
         filter.date = { $regex: new RegExp(`/${yearString}$`) };
-    }
+    };
+
+    if (categoryId) {
+        filter.category = categoryId;
+    };
 
     const expensesByMonthAndYear = await Expense.find(filter)
     .populate('category', 'name');

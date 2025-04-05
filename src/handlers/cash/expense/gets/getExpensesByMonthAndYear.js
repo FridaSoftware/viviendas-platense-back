@@ -2,13 +2,13 @@ const getController = require('../../../../controllers/cash/expense/gets/getExpe
 
 const getExpensesByMonthAndYearHandler = async (req, res) => {
 
-    const { month, year } = req.query;
+    const { month, year, categoryId } = req.query;
 
     try {
-        const expensesByMonthAndYear = await getController(month, year);
+        const expensesByMonthAndYear = await getController(month, year, categoryId);
 
         if (!expensesByMonthAndYear) {
-            return res.status(404).send(`No expenses found for month ${month} and year ${year}`);
+            return res.status(404).send(`No expenses found for month ${month} and year ${year}, or for category ${categoryId}`);
         }
 
         res.status(200).send(expensesByMonthAndYear);
