@@ -12,16 +12,25 @@ const getBalanceIncomesByMonthAndYearCtrl = async (month, year) => {
     
     const incomes = await Income.find(filter);
 
-    // Calcular las sumas
-    const totalIncomes = incomes.reduce((acc, income) => acc + income.amount, 0);
+    // Inicializamos dos variables para almacenar las sumas
+    const result = incomes.reduce((acc, income) => {
+      if (income.currency === 'ARS') {
+        acc.totalARS += income.amount;
+      } else if (income.currency === 'USD') {
+        acc.totalUSD += income.amount;
+      }
+      return acc;
+    }, { totalARS: 0, totalUSD: 0 });
 
     return {
-      totalIncomes
+      totalARS: result.totalARS,
+      totalUSD: result.totalUSD
     };
   }
 
   return {
-    totalIncomes: 0,
+    totalARS: 0,
+    totalUSD: 0
   };
 };
 
