@@ -1,14 +1,20 @@
 require('../../../../db.js');
 const Income = require('../../../../models/Income.js');
 
-const getBalanceIncomesByMonthAndYearCtrl = async (month, year) => {
+const getBalanceIncomesByMonthAndYearCtrl = async (month, year, categoryId) => {
+
   const filter = { active: true };
 
   if (year && month) {
     const formattedMonth = month.toString().padStart(2, "0");
     const yearString = year.toString();
 
+    // Filtrar por fecha tipo texto
     filter.date = { $regex: new RegExp(`^\\d{2}/${formattedMonth}/${yearString}$`) };
+
+    if (categoryId) {
+      filter.category = categoryId;
+    };
     
     const incomes = await Income.find(filter);
 
