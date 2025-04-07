@@ -28,7 +28,7 @@ const paymentSchema = new Schema({
         type: Number
     },
 
-    lateFee: { // Monto de la punitoria
+    lateFee: { // Porcentaje de la punitoria
         type: Number
     },
 
