@@ -26,7 +26,8 @@ const putCreateContractCtrl = async (_id, client, contractDate, model, roofType,
 
             installments.push({
                 dueDate: formattedDueDate,
-                amountWithoutLateFee: installmentsPrice
+                amountWithoutLateFee: installmentsPrice,
+                description: `Cuota ${i + 1}/${installmentsQuantity}`
             });
         }
 
