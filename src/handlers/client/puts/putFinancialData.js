@@ -23,7 +23,7 @@ const putFinancialDataHandler = async (req, res) => {
         if(downPayment && !["USD", "ARS"].includes(downPayment.currency)) return res.status(400).send({ error: 'Incorrect data - downpayment.currency must be "USD" or "ARS"' });
         if(downPayment && typeof downPayment.paymentMethod !== 'string') return res.status(400).send({ error: 'Incorrect DataType - downPayment.paymentMethod must be string' });
 
-        const updatedClient = await putController( _id, vendor, totalCost, downPayment);
+        const updatedClient = await putController( client, vendor, totalCost, downPayment);
 
         res.status(200).send(updatedClient);
 
