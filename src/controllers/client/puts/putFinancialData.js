@@ -24,10 +24,10 @@ const putFinancialDataCtrl = async (client, vendor, totalCost, downPayment) => {
     } else if(updatedClient && downPayment){
         const categories = await getIncomeCategories();
 
-        let downPaymentCategory = categories.find((category) => category.name === "Seña");
+        let downPaymentCategory = categories.find((category) => category.name === "Señas");
 
         if(!downPaymentCategory){
-            downPaymentCategory = await postIncomeCategory("Seña");
+            downPaymentCategory = await postIncomeCategory("Señas");
         }
 
         const newIncome = await postIncome(downPayment.paidDate, downPayment.finalAmount, downPayment.currency, downPayment.paymentMethod, downPaymentCategory._id, `Seña - Cliente N°${updatedClient.number}`);
