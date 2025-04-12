@@ -72,7 +72,8 @@ const putCreateContractCtrl = async (_id, client, contractDate, model, roofType,
     const updatedClient = await Client.findOneAndUpdate(
         { _id },
         {
-            ...newContract,  
+            ...newContract,
+            contractSigned: false,
             $push: { contractVersion: newContract }
         },
         { new: true }
