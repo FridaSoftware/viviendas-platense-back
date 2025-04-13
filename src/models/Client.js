@@ -60,7 +60,8 @@ const clientSchema = new Schema({
     },
 
     imageData: {
-        type: imageDataSchema
+        type: [imageDataSchema],
+        default: []
     },
 
     other: { // Espacio para anotaciones
