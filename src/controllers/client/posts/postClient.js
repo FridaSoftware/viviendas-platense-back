@@ -1,6 +1,6 @@
 const Client = require('../../../models/Client.js');
 
-const postClientCtrl = async (dni, name, address, city, phone, projectAddress, projectCity, model, downPayment) => {
+const postClientCtrl = async (dni, name, address, city, phone, projectAddress, projectCity, model, downPayment, image) => {
 
     const newClient = {
         personalData: {
@@ -19,6 +19,10 @@ const postClientCtrl = async (dni, name, address, city, phone, projectAddress, p
         
         financialData: {
             downPayment
+        },
+
+        imageData: {
+            image
         }
     };
 

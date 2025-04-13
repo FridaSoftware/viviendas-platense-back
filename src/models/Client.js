@@ -2,6 +2,7 @@ const { Schema, model } = require('mongoose');
 const personalDataSchema = require('./schemas/personalData.js');
 const projectDataSchema = require('./schemas/projectData.js');
 const financialDataSchema = require('./schemas/financialData.js');
+const imageDataSchema = require('./schemas/imageData.js');
 const { validateDateFormat } = require('../utils/validateUtils.js');
 const getNextClientNumber = require('../utils/getNextClientNumber.js');
 
@@ -56,6 +57,10 @@ const clientSchema = new Schema({
 
     financialData: {
         type: financialDataSchema
+    },
+
+    imageData: {
+        type: imageDataSchema
     },
 
     other: { // Espacio para anotaciones

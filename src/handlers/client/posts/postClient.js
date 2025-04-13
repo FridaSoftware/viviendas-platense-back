@@ -2,7 +2,7 @@ const postController = require('../../../controllers/client/posts/postClient.js'
 const { validateDateFormat } = require('../../../utils/validateUtils.js');
 
 const postClientHandler = async (req, res) => {
-    const { dni, name, address, city, phone, projectAddress, projectCity, model, downPayment } = req.body;
+    const { dni, name, address, city, phone, projectAddress, projectCity, model, downPayment, image } = req.body;
 
     try {
         
@@ -26,7 +26,7 @@ const postClientHandler = async (req, res) => {
             if(typeof downPayment.currency !== 'string' || !(downPayment.currency === 'USD' || downPayment.currency === 'ARS')) return res.status(400).send({ error: 'Incorrect DataType - downPayment.currency must be string "USD" or "ARS"' });
         }
 
-        const newClient = await postController(dni, name, address, city, phone, projectAddress, projectCity, model, downPayment);
+        const newClient = await postController(dni, name, address, city, phone, projectAddress, projectCity, model, downPayment, image);
         res.status(200).send(newClient);
 
     } catch (error) {
