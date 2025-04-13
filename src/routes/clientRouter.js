@@ -1,5 +1,5 @@
 const clientRouter = require('express').Router();
-const { getClients, getClientById, postClient, putCreateContract, putGeneralData, putPersonalData, putProjectData, putFinancialData, putPayment, putClientStatus } = require('../handlers/client/index.js');
+const { getClients, getClientById, postClient, putCreateContract, putGeneralData, putPersonalData, putProjectData, putFinancialData, putImageData, putPayment, putClientStatus } = require('../handlers/client/index.js');
 
 clientRouter.get('/', getClients);
 clientRouter.get('/:id', getClientById);
@@ -9,6 +9,7 @@ clientRouter.put('/generalData', putGeneralData);
 clientRouter.put('/personalData', putPersonalData);
 clientRouter.put('/projectData', putProjectData);
 clientRouter.put('/financialData', putFinancialData);
+clientRouter.put('/imageData', putImageData);
 clientRouter.put('/payment', putPayment);
 clientRouter.put('/:id', putClientStatus);
 
