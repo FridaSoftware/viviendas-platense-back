@@ -3,7 +3,7 @@ const getCategories = require('../../category/income/gets/getCategories.js');
 const postCategory = require('../../category/income/posts/postIncomeCategory.js');
 const postIncome = require('../../cash/income/posts/postIncome.js');
 
-const postClientCtrl = async (dni, name, address, city, phone, projectAddress, projectCity, model, downPayment, image) => {
+const postClientCtrl = async (dni, name, address, city, phone, projectAddress, projectCity, model, downPayment) => {
 
     const newClient = {
         personalData: {
@@ -22,10 +22,6 @@ const postClientCtrl = async (dni, name, address, city, phone, projectAddress, p
         
         financialData: {
             downPayment
-        },
-
-        imageData: {
-            image
         }
     };
 
