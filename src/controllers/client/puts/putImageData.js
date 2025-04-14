@@ -3,10 +3,12 @@ const Client = require('../../../models/Client.js');
 const putImageDataCtrl = async (_id, image, name, description) => {
 
     const update = {
-        imageData: {
-            image,
-            name,
-            description
+        $push: {
+            imageData: {
+                image,
+                name,
+                description
+            }
         }
     };
 
