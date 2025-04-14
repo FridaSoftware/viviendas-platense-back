@@ -1,4 +1,4 @@
-const putController = require('../../../controllers/client/delete/deleteImageData.js');
+const deleteController = require('../../../controllers/client/delete/deleteImageData.js');
 const getByIdController = require('../../../controllers/client/gets/getClientById.js');
 
 const deleteImageDataHandler = async (req, res) => {
@@ -13,9 +13,9 @@ const deleteImageDataHandler = async (req, res) => {
 
         if(typeof imageId !== 'string') return res.status(400).send({ error: 'Incorrect DataType - imageId must be string' });
 
-        const updatedClient = await putController(clientId, imageId);
+        const updatedClient = await deleteController(clientId, imageId);
         
-        res.status(200).send(updatedClient);
+        res.status(200).send('Image successfully deleted');
 
     } catch (error) {
         return res.status(500).send(error.message);
