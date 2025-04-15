@@ -47,6 +47,11 @@ const clientSchema = new Schema({
         default: false
     },
 
+    contractVersion: {
+        type: [Object],
+        default: null
+    },
+
     personalData: {
         type: personalDataSchema
     },

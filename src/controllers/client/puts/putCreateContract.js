@@ -43,6 +43,7 @@ const putCreateContractCtrl = async (_id, client, contractDate, model, roofType,
 
     const newContract = {
         contractDate,
+        personalData: client.personalData,
         projectData: {
             address: client.projectData.address,
             city: client.projectData.city,
@@ -68,9 +69,17 @@ const putCreateContractCtrl = async (_id, client, contractDate, model, roofType,
         }
     };
 
-    const createdContract = await Client.findOneAndUpdate({ _id }, newContract, { new: true });
+    const updatedClient = await Client.findOneAndUpdate(
+        { _id },
+        {
+            ...newContract,
+            contractSigned: false,
+            $push: { contractVersion: newContract }
+        },
+        { new: true }
+    );
 
-    return createdContract;
+    return updatedClient;
 };
 
 module.exports = putCreateContractCtrl;
