@@ -34,6 +34,12 @@ const clientSchema = new Schema({
         }
     },
 
+    branch:{
+        type: String,
+        enum: ['La Plata', 'Tandil'],
+        default: null
+    },
+
     contractDate: { // La fecha que figura en el contrato
         type: String,
         validate: {
