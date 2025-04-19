@@ -4,7 +4,7 @@ const { validateDateFormat } = require('../../../utils/validateUtils.js');
 
 const putCreateContractHandler = async (req, res) => {
 
-    const { _id, contractDate, model, roofType, roofSlope, baseType, items, areas, sqm, additionals, paymentPlan, totalCost, payments, installmentsDate, installmentsQuantity, installmentsPrice } = req.body;
+    const { _id, branch, contractDate, model, roofType, roofSlope, baseType, items, areas, sqm, additionals, paymentPlan, totalCost, payments, installmentsDate, installmentsQuantity, installmentsPrice } = req.body;
 
     const client = await getByIdController(_id);
 
@@ -12,10 +12,11 @@ const putCreateContractHandler = async (req, res) => {
 
     try {
         
-        if(!_id || !contractDate || !roofType || !roofSlope || !baseType || !items || !areas || !sqm || !paymentPlan || !totalCost || !payments) return res.status(400).send({ error: 'Missing data' });
+        if(!_id || !branch || !contractDate || !roofType || !roofSlope || !baseType || !items || !areas || !sqm || !paymentPlan || !totalCost || !payments) return res.status(400).send({ error: 'Missing data' });
         if(paymentPlan === 'Financiado' && (!installmentsDate || !installmentsQuantity || !installmentsPrice)) return res.status(400).send({ error: 'Missing total cost' });
         if(!client.projectData.model && !model) return res.status(400).send({ error: 'Missing model' });
 
+        if(!["La Plata", "Tandil"].includes(branch)) return res.status(400).send({ error: 'Incorrect data - branch must be "La Plata" or "Tandil"' });
         if(!validateDateFormat(contractDate)) return res.status(400).send({ error: 'Invalid contractDate format. Expected format: DD/MM/YYYY' });
         if(typeof contractDate !== 'string') return res.status(400).send({ error: 'Incorrect DataType - contractDate must be string' });
         if(model && typeof model !== 'string') return res.status(400).send({ error: 'Incorrect DataType - model must be string' });
@@ -37,7 +38,7 @@ const putCreateContractHandler = async (req, res) => {
         if(installmentsQuantity && typeof installmentsQuantity !== 'number') return res.status(400).send({ error: 'Incorrect DataType - installmentsQuantity must be number' });
         if(installmentsPrice && typeof installmentsPrice !== 'number') return res.status(400).send({ error: 'Incorrect DataType - installmentsPrice must be number' });
 
-        const newContract = await putController(_id, client, contractDate, model, roofType, roofSlope, baseType, items, areas, sqm, additionals, paymentPlan, totalCost, payments, installmentsDate, installmentsQuantity, installmentsPrice);
+        const newContract = await putController(_id, client, branch, contractDate, model, roofType, roofSlope, baseType, items, areas, sqm, additionals, paymentPlan, totalCost, payments, installmentsDate, installmentsQuantity, installmentsPrice);
         
         res.status(200).send(newContract);
 
