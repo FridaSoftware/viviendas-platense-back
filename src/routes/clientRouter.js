@@ -10,9 +10,9 @@ clientRouter.put('/personalData', putPersonalData);
 clientRouter.put('/projectData', putProjectData);
 clientRouter.put('/financialData', putFinancialData);
 clientRouter.put('/imageData', putImageData);
+clientRouter.put('/imageData/delete', deleteImageData);
 clientRouter.put('/exhibit/create', putCreateExhibit);
 clientRouter.put('/payment', putPayment);
 clientRouter.put('/:id', putClientStatus);
-clientRouter.delete('/imageData', deleteImageData);
 
 module.exports = clientRouter;

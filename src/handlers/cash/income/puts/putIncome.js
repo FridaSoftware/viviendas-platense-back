@@ -3,7 +3,7 @@ const { validateDateFormat } = require('../../../../utils/validateUtils.js');
 
 const putIncomeHandler = async (req, res) => {
 
-    const { _id, date, amount, currency, paymentMethod, category, description } = req.body;
+    const { _id, date, amount, currency, paymentMethod, category, description, fromClient } = req.body;
     
     try {
         
@@ -27,7 +27,11 @@ const putIncomeHandler = async (req, res) => {
 
         if(typeof description !== 'string') return res.status(400).send({ error: 'Incorrect DataType - description must be string' });
 
-        const updated = await putController(_id, date, amount, currency, paymentMethod, category, description);
+        if (fromClient !== undefined && typeof fromClient !== 'boolean') {
+            return res.status(400).send({ error: 'Incorrect DataType - fromClient must be a boolean' });
+        }
+
+        const updated = await putController(_id, date, amount, currency, paymentMethod, category, description, fromClient);
         res.status(200).send('Income updated');
 
     } catch (error) {

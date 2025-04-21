@@ -1,7 +1,7 @@
 require('../../../../db.js');
 const Income = require('../../../../models/Income.js');
 
-const putIncomeCtrl = async (_id, date, amount, currency, paymentMethod, category, description) => {
+const putIncomeCtrl = async (_id, date, amount, currency, paymentMethod, category, description, fromClient) => {
 
     const update = {};
 
@@ -27,6 +27,10 @@ const putIncomeCtrl = async (_id, date, amount, currency, paymentMethod, categor
 
     if (description !== null && description !== false) {
         update.description = description;
+    };
+
+    if (fromClient !== null) {
+        update.fromClient = fromClient;
     };
 
     try {

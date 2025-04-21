@@ -3,6 +3,7 @@ const { validateDateFormat } = require('../../../utils/validateUtils.js');
 
 const postClientHandler = async (req, res) => {
     const { dni, name, address, city, phone, projectAddress, projectCity, model, downPayment } = req.body;
+console.log(req.body);
 
     try {
         
@@ -24,12 +25,16 @@ const postClientHandler = async (req, res) => {
             if(typeof downPayment.finalAmount !== 'number') return res.status(400).send({ error: 'Incorrect DataType - downPayment.finalAmount must be number' });
             if(typeof downPayment.paymentMethod !== 'string') return res.status(400).send({ error: 'Incorrect DataType - downPayment.paymentMethod must be string' });
             if(typeof downPayment.currency !== 'string' || !(downPayment.currency === 'USD' || downPayment.currency === 'ARS')) return res.status(400).send({ error: 'Incorrect DataType - downPayment.currency must be string "USD" or "ARS"' });
+            if (downPayment.fromClient !== undefined && typeof downPayment.fromClient !== 'boolean') {
+                return res.status(400).send({ error: 'Incorrect DataType - downPayment.fromClient must be a boolean' });
+            }
         }
 
         const newClient = await postController(dni, name, address, city, phone, projectAddress, projectCity, model, downPayment);
         res.status(200).send(newClient);
 
     } catch (error) {
+        console.error('Error in postClientHandler:', error);
         return res.status(500).send(error.message);
     }
 };
