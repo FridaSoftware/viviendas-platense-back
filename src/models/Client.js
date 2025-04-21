@@ -79,6 +79,33 @@ const clientSchema = new Schema({
         type: String
     },
 
+    exhibits: {
+        type: [{
+            date: {
+                type: String,
+                validate: {
+                    validator: validateDateFormat,
+                    message: 'Invalid date format. Expected format: DD/MM/YYYY'
+                },
+                required: true
+            },
+                title: {
+                type: String,
+                required: true
+            },
+            body: {
+                type: String,
+                required: true
+            },
+            isSigned: {
+                type: Boolean,
+                default: false
+            }
+        }],
+        
+        default: []
+    },
+
     active: {
         type: Boolean,
         default: true
