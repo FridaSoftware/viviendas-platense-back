@@ -65,7 +65,8 @@ const putPaymentCtrl = async (client, paymentPath, payment) => {
                     payment.currency, 
                     payment.paymentMethod, 
                     income.category, 
-                    description
+                    description,
+                    payment.fromClient
                 );
             }
         } else {
@@ -86,7 +87,8 @@ const putPaymentCtrl = async (client, paymentPath, payment) => {
                 payment.currency, 
                 payment.paymentMethod, 
                 paymentCategory._id, 
-                description
+                description,
+                payment.fromClient
             );
         }
     }

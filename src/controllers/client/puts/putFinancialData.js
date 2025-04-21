@@ -19,7 +19,7 @@ const putFinancialDataCtrl = async (client, vendor, totalCost, downPayment) => {
 
         const income = await getIncomeByDescription(`Seña - Cliente N°${updatedClient.number}`);
 
-        const updatedIncome = await putIncome(income._id, downPayment.paidDate, downPayment.finalAmount, downPayment.currency, downPayment.paymentMethod, income.category, `Seña - Cliente N°${updatedClient.number}`);
+        const updatedIncome = await putIncome(income._id, downPayment.paidDate, downPayment.finalAmount, downPayment.currency, downPayment.paymentMethod, income.category, `Seña - Cliente N°${updatedClient.number}`, downPayment.fromClient);
 
     } else if(updatedClient && downPayment){
         const categories = await getIncomeCategories();
@@ -30,7 +30,7 @@ const putFinancialDataCtrl = async (client, vendor, totalCost, downPayment) => {
             downPaymentCategory = await postIncomeCategory("Señas");
         }
 
-        const newIncome = await postIncome(downPayment.paidDate, downPayment.finalAmount, downPayment.currency, downPayment.paymentMethod, downPaymentCategory._id, `Seña - Cliente N°${updatedClient.number}`);
+        const newIncome = await postIncome(downPayment.paidDate, downPayment.finalAmount, downPayment.currency, downPayment.paymentMethod, downPaymentCategory._id, `Seña - Cliente N°${updatedClient.number}`, downPayment.fromClient);
     };
 
     return updatedClient;

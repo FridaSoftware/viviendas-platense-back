@@ -37,6 +37,10 @@ const incomeSchema = new Schema({
         type: String
     },
 
+    fromClient: {
+        type: Boolean
+    },
+
     active: {
         type: Boolean,
         default: true
