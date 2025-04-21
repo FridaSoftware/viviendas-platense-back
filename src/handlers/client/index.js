@@ -7,6 +7,7 @@ const putPersonalData = require('./puts/putPersonalData.js');
 const putProjectData = require('./puts/putProjectData.js');
 const putFinancialData = require('./puts/putFinancialData.js');
 const putImageData = require('./puts/putImageData.js');
+const putCreateExhibit = require('./puts/putCreateExhibit.js');
 const putPayment = require('./puts/putPayment.js');
 const putClientStatus = require('./puts/putClientStatus.js');
 const deleteImageData = require('./delete/deleteImageData.js');
@@ -21,6 +22,7 @@ module.exports = {
     putProjectData,
     putFinancialData,
     putImageData,
+    putCreateExhibit,
     putPayment,
     putClientStatus,
     deleteImageData
