@@ -16,8 +16,7 @@ const putEditExhibitCtrl = async (client, exhibitData) => {
             $set: {
                 'exhibits.$.date': exhibitData.date,
                 'exhibits.$.title': exhibitData.title,
-                'exhibits.$.body': exhibitData.body,
-                'exhibits.$.isSigned': exhibitData.isSigned || false
+                'exhibits.$.body': exhibitData.body
             }
         },
         { new: true }

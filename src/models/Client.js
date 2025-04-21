@@ -89,17 +89,13 @@ const clientSchema = new Schema({
                 },
                 required: true
             },
-                title: {
+            title: {
                 type: String,
                 required: true
             },
             body: {
                 type: String,
                 required: true
-            },
-            isSigned: {
-                type: Boolean,
-                default: false
             }
         }],
         
