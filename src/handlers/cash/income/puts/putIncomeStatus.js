@@ -1,4 +1,4 @@
-const getController = require('../../../../controllers/cash/income/puts/putExpenseStatus.js');
+const getController = require('../../../../controllers/cash/income/puts/putIncomeStatus.js');
 
 const putIncomeStatusHandler = async (req, res) => {
     const { id } = req.params;
