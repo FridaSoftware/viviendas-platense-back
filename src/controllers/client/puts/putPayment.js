@@ -4,6 +4,7 @@ const postIncomeCategory = require('../../category/income/posts/postIncomeCatego
 const getIncomeByDescription = require('../../cash/income/gets/getIncomeByDescription.js');
 const postIncome = require('../../cash/income/posts/postIncome.js');
 const putIncome = require('../../cash/income/puts/putIncome.js');
+const putIncomeStatus = require('../../cash/income/puts/putIncomeStatus.js');
 
 const putPaymentCtrl = async (client, paymentPath, payment) => {
     // Convertir el path en un array para navegar el objeto (ej: 'financialData.lumpSum.payments' -> ['financialData', 'lumpSum', 'payments'])
@@ -90,6 +91,18 @@ const putPaymentCtrl = async (client, paymentPath, payment) => {
                 description,
                 true
             );
+        }
+    } else if(updatedClient && wasPaid && !payment.isPaid){
+
+        let description;
+
+        paymentPath.includes("installments") ?
+        description = `${originalPayment.description} - Cliente N°${updatedClient.number}` :
+        description = `Pago ${paymentIndex + 1} - Cliente N°${updatedClient.number}`;
+
+        const income = await getIncomeByDescription(description);
+        if (income) {
+            await putIncomeStatus(income._id);
         }
     }
 

@@ -1,7 +1,7 @@
 require('../../../../db.js');
 const Income = require('../../../../models/Income.js');
 
-const putExpenseStatusCtrl = async (_id) => {
+const putIncomeStatusCtrl = async (_id) => {
 
     const income = await Income.findById(_id);
     const newStatus = !income.active;
@@ -13,4 +13,4 @@ const putExpenseStatusCtrl = async (_id) => {
     return updatedStatus;
 };
 
-module.exports = putExpenseStatusCtrl;
+module.exports = putIncomeStatusCtrl;
