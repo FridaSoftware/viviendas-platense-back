@@ -1,7 +1,7 @@
 const getController = require('../../../controllers/client/gets/getClients.js');
 
 const getClientsHandler = async (req, res) => {
-    const { active, number, name } = req.query;
+    const { active, number, name, state } = req.query;
 
     const projection = {
         "number": 1,
@@ -17,7 +17,7 @@ const getClientsHandler = async (req, res) => {
     };
 
     try {
-        const clients = await getController({ active, number, name }, projection);
+        const clients = await getController({ active, number, name, state }, projection);
         res.status(200).send(clients);
     } catch (error) {
         res.status(500).send({ error: error.message });

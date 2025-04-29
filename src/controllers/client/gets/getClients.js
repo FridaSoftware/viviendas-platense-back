@@ -2,7 +2,7 @@ require('../../../db.js');
 const Client = require('../../../models/Client.js');
 
 const getClientsCtrl = async (filters, projection) => {
-    const { active, number, name } = filters;
+    const { active, number, name, state } = filters;
 
     const filter = {};
 
@@ -16,6 +16,10 @@ const getClientsCtrl = async (filters, projection) => {
 
     if (name !== undefined) {
         filter['personalData.normalizedName'] = { $regex: name, $options: 'i' };
+    }
+
+    if (state !== undefined) {
+        filter.state = state;
     }
 
     const clients = await Client.find(filter, projection);
