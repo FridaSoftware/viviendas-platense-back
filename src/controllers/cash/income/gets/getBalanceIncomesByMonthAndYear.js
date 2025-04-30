@@ -1,5 +1,6 @@
 require('../../../../db.js');
 const Income = require('../../../../models/Income.js');
+const Expense = require('../../../../models/Expense.js');
 
 const getBalanceIncomesByMonthAndYearCtrl = async (month, year, categoryId) => {
 
@@ -12,14 +13,18 @@ const getBalanceIncomesByMonthAndYearCtrl = async (month, year, categoryId) => {
     // Filtrar por fecha tipo texto
     filter.date = { $regex: new RegExp(`^\\d{2}/${formattedMonth}/${yearString}$`) };
 
+    const incomeFilter = { ...filter };
+    const expenseFilter = { ...filter };
+
     if (categoryId) {
-      filter.category = categoryId;
+      incomeFilter.category = categoryId;
     };
     
-    const incomes = await Income.find(filter);
+    const incomes = await Income.find(incomeFilter);
 
+    //OBTENER INGRESOS
     // Inicializamos dos variables para almacenar las sumas
-    const result = incomes.reduce((acc, income) => {
+    const incomeTotals  = incomes.reduce((acc, income) => {
       if (income.currency === 'ARS') {
         acc.totalARS += income.amount;
       } else if (income.currency === 'USD') {
@@ -28,9 +33,30 @@ const getBalanceIncomesByMonthAndYearCtrl = async (month, year, categoryId) => {
       return acc;
     }, { totalARS: 0, totalUSD: 0 });
 
+    //OBTENER EGRESOS
+    const expenses = await Expense.find(expenseFilter);
+    const expenseTotals = expenses.reduce((acc, expense) => {
+      if (expense.currency === 'ARS') {
+        acc.totalARS += expense.amount;
+      } else if (expense.currency === 'USD') {
+        acc.totalUSD += expense.amount;
+      }
+      return acc;
+    }, { totalARS: 0, totalUSD: 0 });
+
+    // Calcular balances
+    const balanceARS = incomeTotals.totalARS - expenseTotals.totalARS;
+    const balanceUSD = incomeTotals.totalUSD - expenseTotals.totalUSD;
+
     return {
-      totalARS: result.totalARS,
-      totalUSD: result.totalUSD
+      totalIncomes: {
+        ARS: incomeTotals.totalARS,
+        USD: incomeTotals.totalUSD
+      },
+      balance: {
+        ARS: balanceARS,
+        USD: balanceUSD
+      }
     };
   }
 
