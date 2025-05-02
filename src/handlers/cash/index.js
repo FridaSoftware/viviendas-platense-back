@@ -22,9 +22,14 @@ const postExpense = require('./expense/posts/postExpense.js');
 const putExpense = require('./expense/puts/putExpense.js');
 const putExpenseStatus = require('./expense/puts/putExpenseStatus.js');
 
+//--- HISTORY
+const getCashFlow = require('./cashFlow/gets/getCashFlow.js');
+
 
 module.exports = {
     getIncomes,
+    getExpenses,
+    getCashFlow,
     getActiveIncomes,
     getActiveExpenses,
     getIncomeById,
@@ -38,7 +43,6 @@ module.exports = {
     getActiveIncomesByDate,
     getActiveExpensesByDate,
     postIncome,
-    getExpenses,
     postExpense,
     putIncome,
     putExpense,
