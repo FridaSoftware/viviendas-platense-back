@@ -1,6 +1,15 @@
 const cashFlowRouter = require('express').Router();
-const { getCashFlow } = require('../handlers/cash/index.js');
+const { getCashFlow, getCashFlowByDate } = require('../handlers/cash/index.js');
 
-cashFlowRouter.get('/', getCashFlow);
+cashFlowRouter.get('/', (req, res, next) => {
+    const { start, end } = req.query;
+
+    if(start && end){
+        return getCashFlowByDate(req, res, next);
+    };
+
+    return getCashFlow(req, res, next);
+
+});
 
 module.exports = cashFlowRouter;
