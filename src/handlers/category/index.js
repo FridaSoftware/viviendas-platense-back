@@ -12,11 +12,15 @@ const postExpenseCategory = require('./expense/posts/postExpenseCategory.js');
 const putExpenseCategory = require('./expense/puts/putExpenseCategory.js');
 const putExpenseCategoryStatus = require('./expense/puts/putExpenseCategoryStatus.js');
 
+//--- ALL
+const getAllCategories = require('./getAllCategories.js');
+
 module.exports = {
     getIncomeCategories,
     getExpenseCategories,
     getActiveIncomeCategories,
     getActiveExpenseCategories,
+    getAllCategories,
     postIncomeCategory,
     postExpenseCategory,
     putIncomeCategory,
