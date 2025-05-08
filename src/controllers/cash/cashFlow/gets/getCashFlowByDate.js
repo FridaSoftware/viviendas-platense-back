@@ -2,7 +2,7 @@ require('../../../../db.js');
 const Income = require('../../../../models/Income.js');
 const Expense = require('../../../../models/Expense.js');
 
-const getCashFlowByDateCtrl = async (start, end) => {
+const getCashFlowByDateCtrl = async (start, end, categoryId) => {
     // Función para convertir 'DD/MM/YYYY' a 'YYYY-MM-DD'
     const formatDateToISO = (dateStr) => {
         const [year, month, day] = dateStr.split('-');
@@ -13,8 +13,8 @@ const getCashFlowByDateCtrl = async (start, end) => {
     const endDate = formatDateToISO(end);
     endDate.setHours(23, 59, 59, 999); // Asegurar que incluya el último momento del día
 
-    // Traer los ingresos en el rango de fechas
-    const incomes = await Income.find({
+    // Construir filtro para ingresos/egresos
+    const incomeFilter = {
         active: true,
         $expr: {
             $and: [
@@ -22,9 +22,9 @@ const getCashFlowByDateCtrl = async (start, end) => {
                 { $lte: [{ $dateFromString: { dateString: "$date", format: "%d/%m/%Y" } }, endDate] }
             ]
         }
-    }).populate('category', 'name');
+    };
 
-    const expenses = await Expense.find({
+    const expenseFilter = {
         active: true,
         $expr: {
             $and: [
@@ -32,7 +32,15 @@ const getCashFlowByDateCtrl = async (start, end) => {
                 { $lte: [{ $dateFromString: { dateString: "$date", format: "%d/%m/%Y" } }, endDate] }
             ]
         }
-    }).populate('category', 'name');
+    };
+
+    if (categoryId) {
+        incomeFilter.category = categoryId;
+        expenseFilter.category = categoryId;
+    }
+
+    const incomes = await Income.find(incomeFilter).populate('category', 'name');
+    const expenses = await Expense.find(expenseFilter).populate('category', 'name');
 
     // Agregar tipo para distinguir en el array combinado
     const formattedIncomes = incomes.map(entry => ({ ...entry.toObject(), type: 'income' }));
