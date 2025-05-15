@@ -4,6 +4,7 @@ const postIncomeCategory = require('../../category/income/posts/postIncomeCatego
 const getIncomeByDescription = require('../../cash/income/gets/getIncomeByDescription.js');
 const postIncome = require('../../cash/income/posts/postIncome.js');
 const putIncome = require('../../cash/income/puts/putIncome.js');
+const putIncomeStatus = require('../../cash/income/puts/putIncomeStatus.js');
 
 const putFinancialDataCtrl = async (client, vendor, totalCost, downPayment) => {
     
@@ -19,7 +20,15 @@ const putFinancialDataCtrl = async (client, vendor, totalCost, downPayment) => {
 
         const income = await getIncomeByDescription(`Seña - ${updatedClient.personalData.name}`);
 
-        const updatedIncome = await putIncome(income._id, downPayment.paidDate, downPayment.finalAmount, downPayment.currency, downPayment.paymentMethod, income.category, `Seña - ${updatedClient.personalData.name}`, true);
+        if(downPayment.finalAmount === 0){
+            const deletedIncome = await putIncomeStatus(income._id);
+        } else {
+            const updatedIncome = await putIncome(income._id, downPayment.paidDate, downPayment.finalAmount, downPayment.currency, downPayment.paymentMethod, income.category, `Seña - ${updatedClient.personalData.name}`, true);
+            
+            if(income.active === false){
+                const activatedIncome = await putIncomeStatus(income._id);
+            }
+        }
 
     } else if(updatedClient && downPayment){
         const categories = await getIncomeCategories();
