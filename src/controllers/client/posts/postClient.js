@@ -36,7 +36,7 @@ const postClientCtrl = async (dni, name, address, city, phone, projectAddress, p
             downPaymentCategory = await postCategory("Señas");
         }
 
-        const newIncome = await postIncome(downPayment.paidDate, downPayment.finalAmount, downPayment.currency, downPayment.paymentMethod, downPaymentCategory._id, `Seña - Cliente N°${createdClient.number}`, downPayment.fromClient);
+        const newIncome = await postIncome(downPayment.paidDate, downPayment.finalAmount, downPayment.currency, downPayment.paymentMethod, downPaymentCategory._id, `Seña - ${createdClient.personalData.name}`, downPayment.fromClient);
     };
 
     return createdClient;
