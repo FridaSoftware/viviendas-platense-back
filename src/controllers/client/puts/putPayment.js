@@ -51,8 +51,8 @@ const putPaymentCtrl = async (client, paymentPath, payment) => {
         let description;
 
         paymentPath.includes("installments") ?
-        description = `${originalPayment.description} - Cliente N°${updatedClient.number}` :
-        description = `Pago ${paymentIndex + 1} - Cliente N°${updatedClient.number}`;
+        description = `${originalPayment.description} - ${updatedClient.personalData.name}` :
+        description = `Pago ${paymentIndex + 1} - ${updatedClient.personalData.name}`;
         
         
         if (wasPaid) {
@@ -97,8 +97,8 @@ const putPaymentCtrl = async (client, paymentPath, payment) => {
         let description;
 
         paymentPath.includes("installments") ?
-        description = `${originalPayment.description} - Cliente N°${updatedClient.number}` :
-        description = `Pago ${paymentIndex + 1} - Cliente N°${updatedClient.number}`;
+        description = `${originalPayment.description} - ${updatedClient.personalData.name}` :
+        description = `Pago ${paymentIndex + 1} - ${updatedClient.personalData.name}`;
 
         const income = await getIncomeByDescription(description);
         if (income) {
