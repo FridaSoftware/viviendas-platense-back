@@ -71,7 +71,24 @@ const getCashFlowByDateCtrl = async (start, end, categoryId, currency, type) => 
         return parseDate(a.date) - parseDate(b.date);
     });
 
-    return results;
+    // Calcular totales por moneda
+    const totalCash = {
+        totalARS: 0,
+        totalUSD: 0
+    };
+
+    for (const entry of results) {
+        if (entry.currency === 'ARS') {
+            totalCash.totalARS += entry.type === 'income' ? entry.amount : -entry.amount;
+        } else if (entry.currency === 'USD') {
+            totalCash.totalUSD += entry.type === 'income' ? entry.amount : -entry.amount;
+        }
+    }
+
+    return {
+        cashFlow: results,
+        totalCash
+    };
 };
 
 module.exports = getCashFlowByDateCtrl;
